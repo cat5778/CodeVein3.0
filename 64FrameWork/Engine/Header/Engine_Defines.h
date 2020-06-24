@@ -12,6 +12,7 @@
 #include <functional>
 #include <ctime>
 #include <process.h>
+#include <intrin.h>
 #include <stdlib.h>
 #pragma warning(disable : 4251)
 
@@ -32,8 +33,8 @@
 
 #ifndef DBG_NEW 
 
-#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
-#define new DBG_NEW 
+//#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ ) 
+//#define new DBG_NEW 
 
 #endif
 

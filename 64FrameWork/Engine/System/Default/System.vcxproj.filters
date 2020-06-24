@@ -28,6 +28,9 @@
     <Filter Include="04. DInput">
       <UniqueIdentifier>{3b10109b-eb4b-4886-8487-a7b931763db5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05 DxShow">
+      <UniqueIdentifier>{3c5d783d-532d-434c-9f75-b04fc3df09dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\GraphicDev.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\InputDev.cpp">
       <Filter>04. DInput</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VMR9Graph.cpp">
+      <Filter>05 DxShow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\InputDev.h">
       <Filter>04. DInput</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VMR9Graph.h">
+      <Filter>05 DxShow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

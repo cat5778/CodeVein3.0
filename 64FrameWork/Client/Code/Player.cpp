@@ -78,15 +78,15 @@ HRESULT CPlayer::LateReady_GameObject(void)
 	if (m_ppGameObjectMap == nullptr)
 		m_ppGameObjectMap = &Engine::Get_Layer(L"GameLogic")->Get_ObjectMap();
 
+
 	return S_OK;
 }
 
 _int CPlayer::Update_GameObject(const _float& fTimeDelta)
 {
-	if (m_eCurState >= 10 && m_eCurState <= 25)
-	{
+	m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
+	if (m_eCurState >= OBJ_HURT_F && m_eCurState <= OBJ_STRONG_HURT_L)
 		KnockBack(fTimeDelta);
-	}
 	else
 		Key_Input(fTimeDelta);
 	
@@ -94,26 +94,17 @@ _int CPlayer::Update_GameObject(const _float& fTimeDelta)
 	StateMachine();
 	if (m_eCurState >= OBJ_ATTACK && m_eCurState <= OBJ_CHARGE_ATTACK)
 	{
-		//_float Get_AniRatio() = (_float)(m_pMeshCom->Get_TrackPosition() / m_pMeshCom->Get_Period());
 
 		if (m_eCurState == OBJ_ATTACK)
 		{
-			if (Get_AniRatio() >= 0.1f&& Get_AniRatio() <= 0.6f)
-				m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, true);
-			else
-				m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
+			SetColliderEnable(0.15f, 0.5f);
 		}
 		else if (m_eCurState == OBJ_CHARGE_ATTACK)
 		{
-			if ((Get_AniRatio() >= 0.1f&& Get_AniRatio() <= 0.15f)||
-				(Get_AniRatio() >= 0.175f&& Get_AniRatio() <= 0.2f)||
-				(Get_AniRatio() >= 0.225f&& Get_AniRatio() <= 0.25f)||
-				(Get_AniRatio() >= 0.275f&& Get_AniRatio() <= 0.3f))
-			{
-				m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, true);
-			}
-			else
-				m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
+			SetColliderEnable(0.1f, 0.15f);
+			SetColliderEnable(0.175f, 0.2f);
+			SetColliderEnable(0.225f, 0.25f);
+			SetColliderEnable(0.275f, 0.3f);
 		}
 	}
 
@@ -214,9 +205,11 @@ HRESULT CPlayer::Add_Component(void)
 	m_pComponentMap[Engine::ID_DYNAMIC].emplace(L"Com_ColliderGroup", pComponent);
 	for(int i=0; i<Engine::COLOPT_END;i++)
 		m_pColliderGroupCom->Set_ColliderEnable((Engine::COLLOPTION)i, true);
-
+	m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
 
 	CColliderManager::GetInstance()->Get_ObjCollider(m_pColliderGroupCom, m_ObjName);
+
+
 
 	//m_pSpherColliderCom->Set_Radius(14.0f);
 	//m_pSpherColliderCom->Set_Pos(_vec3(0.f,250.f,0.f));
@@ -311,7 +304,6 @@ void CPlayer::Key_Input(const _float& fTimeDelta)
 			_double dRatio = m_pMeshCom->Get_TrackPosition() / m_pMeshCom->Get_Period();
 			if (dRatio >= 0.2&&dRatio < 0.7)
 			{
-				//m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK,true);
 
 				m_uiCombo++;
 				switch (m_uiCombo)
@@ -346,7 +338,7 @@ void CPlayer::Key_Input(const _float& fTimeDelta)
 				_double dRatio = m_pMeshCom->Get_TrackPosition() / m_pMeshCom->Get_Period();
 				if (dRatio >= 0.2&&dRatio < 0.9)
 				{
-					m_eCurState = OBJ_ATTACK;
+					m_eCurState = OBJ_DODGE_ATTACK;
 					m_pMeshCom->Set_AnimationSet(23);
 				}
 
@@ -412,6 +404,7 @@ void CPlayer::Key_Input(const _float& fTimeDelta)
 		AttackMoveSet(fTimeDelta);
 		StorngAttackMoveSet(fTimeDelta);
 		ChargeAttackMoveSet(fTimeDelta);
+		DodgeAttackMoveSet(fTimeDelta);
 		m_dwDirectionFlag = 0;
 
 	}
@@ -771,7 +764,7 @@ void CPlayer::StateMachine()
 			m_fAnimSpeed = 1.0f;
 
 			m_fSpeed = 3.5f;
-			m_fRotSpeed = 10.f;
+			m_fRotSpeed = 6.f;
 
 			if (m_bIsLockOn)
 			{
@@ -968,6 +961,11 @@ void CPlayer::StateMachine()
 			m_pMeshCom->Set_AnimationSet(44);
 		}
 		break;
+		case OBJ_DODGE_ATTACK:
+		{
+
+		}
+			break;
 		case OBJ_END:
 			break;
 		default:
@@ -1099,6 +1097,18 @@ void CPlayer::ChargeAttackMoveSet(_float fTimeDelta)
 
 }
 
+void CPlayer::DodgeAttackMoveSet(_float fTimeDelta)
+{
+	if (m_eCurState == OBJ_DODGE_ATTACK)
+	{
+		MoveAni(fTimeDelta, 0.0f, 0.1f, 2.0f, _vec3{ 1.f,1.f,1.f });
+
+		MoveAni(fTimeDelta, 0.1f, 0.2f, 7.0f, _vec3{ 1.f,1.f,1.f });
+		SetColliderEnable(0.1f, 0.5f);
+
+	}
+}
+
 void CPlayer::Guard(_float fTimeDelta)
 {
 	if (m_eCurState == OBJ_GUARD)
@@ -1221,15 +1231,19 @@ void CPlayer::Collision_Check(_float fTimeDelta)
 
 				if (m_pColliderGroupCom->IsColl(Engine::COLOPT_ATTACK, Engine::STATE_ENTER))
 				{
-					pMonster->HurtMon(m_fDamage);
+					pMonster->HurtMon(m_fDamage,false);
 					
 					cout << "공격 발생 " << endl;
 				}
 				else if (m_pColliderGroupCom->IsColl(Engine::COLOPT_ATTACK, Engine::STATE_STAY))
-					cout << "공격중 " << endl;
+				{
+					//cout << "공격중 " << endl;
+				}
 			}
 			if (m_pColliderGroupCom->IsColl(Engine::COLOPT_ATTACK, Engine::STATE_EXIT))
-				cout << "공격 끝 " << endl;
+			{
+				//cout << "공격 끝 " << endl;
+			}
 			_vec3 vPos, vTargetPos, vOutPos, vDir;
 			if (bIsStepColl)
 			{
@@ -1250,7 +1264,7 @@ void CPlayer::Collision_Check(_float fTimeDelta)
 
 			if (bIsHurtColl)
 			{
-				cout << "피격 발생 " << endl;
+				//cout << "피격 발생 " << endl;
 				
 				Engine::CTransform* pTargetTransCom = dynamic_cast<Engine::CTransform*>(pObject.second->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
@@ -1263,19 +1277,22 @@ void CPlayer::Collision_Check(_float fTimeDelta)
 						if (pColl->IsColl())
 						{
 							Hurt(fTimeDelta, vPos, pColl->Get_WorldPos(), 12.f);
+				
+						
 						}
 
 					}
 				}
 				else if (m_pColliderGroupCom->IsColl(Engine::COLOPT_HURT, Engine::STATE_STAY))
 				{
-					cout << "피격중 " << endl;
+					//cout << "피격중 " << endl;
 
 				}
 			}
 			if (m_pColliderGroupCom->IsColl(Engine::COLOPT_HURT, Engine::STATE_EXIT))
-					cout << "피격 끝 " << endl;
-
+			{
+				//cout << "피격 끝 " << endl;
+			}
 
 
 		}
@@ -1287,13 +1304,13 @@ void CPlayer::Collision_Check(_float fTimeDelta)
 void CPlayer::Hurt(_float fTimeDelta, _vec3 vPos, _vec3 vTargetPos, _float fDamage)
 {
 	// 데미지에 비례해서 넉백 거리, 애니메이션 변경
-	if (m_dwHurtDirectionFlag)
+	if (m_eCurState>=OBJ_HURT_F&&m_eCurState <= OBJ_STRONG_HURT_L)
 	{
-		cout << "방향있음" << endl;
+		//cout << "맞는중 " << endl;
 		return;
 	}
 
-
+	m_dwHurtDirectionFlag = 0;
 	_vec3 vDir;
 	ExtractY_NormalDir(vPos, vTargetPos, &vDir);
 
@@ -1301,20 +1318,23 @@ void CPlayer::Hurt(_float fTimeDelta, _vec3 vPos, _vec3 vTargetPos, _float fDama
 	_vec3 vRight= *m_pTransformCom->Get_Info(Engine::INFO_RIGHT);
 	_float fAngle=0.f;
 	
-	_float fCos45 = 0.52532198881f;
+	_float fCos60 = 0.15425144988;
 
 	fAngle = Get_Angle(vDir, vLook);
 
-	if (cosf(D3DXToRadian(fAngle)) >= fCos45)
+	if (cosf(D3DXToRadian(fAngle)) >= fCos60)
 		m_dwHurtDirectionFlag |= BACK;
-	else if (cosf(D3DXToRadian(fAngle)) <= -fCos45)
+	else if (cosf(D3DXToRadian(fAngle)) <= -fCos60)
 		m_dwHurtDirectionFlag |= FRONT;
 
 	fAngle = Get_Angle(vDir, vRight);
-	if (cosf(D3DXToRadian(fAngle)) >= fCos45)
+	if (cosf(D3DXToRadian(fAngle)) >= fCos60)
 		m_dwHurtDirectionFlag |= LEFT;
-	else if (cosf(D3DXToRadian(fAngle)) <= -fCos45)
+	else if (cosf(D3DXToRadian(fAngle)) <= -fCos60)
 		m_dwHurtDirectionFlag |= RIGHT;
+
+	cout << m_dwHurtDirectionFlag << endl;
+
 
 	m_vKnockBackDir = vDir;
 	_bool bIsStrongAttack = false;
@@ -1381,7 +1401,7 @@ void CPlayer::KnockBack(_float fTimeDelta)
 				CheckMoveMesh(fTimeDelta, m_vKnockBackDir, false, 3.5f);
 		}
 
-		if (Get_AniRatio() >= 0.9f)
+		if (Get_AniRatio() >= 0.86f)
 		{
 
 			m_eCurState = OBJ_IDLE;
@@ -1391,6 +1411,15 @@ void CPlayer::KnockBack(_float fTimeDelta)
 			m_dwHurtDirectionFlag = 0;
 		}
 	}		
+
+}
+
+void CPlayer::SetColliderEnable(_float fMin, _float fMax)
+{
+	if (Get_AniRatio() >= fMin&& Get_AniRatio() <= fMax)
+		m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, true);
+	else
+		m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
 
 }
 

@@ -11,7 +11,7 @@ class CTexture;
 class CTransform;
 class CRenderer;
 class CShader;
-
+//class CVMR9Graph;
 END
 
 class CBackGround : public Engine::CGameObject
@@ -36,8 +36,8 @@ private:
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 	Engine::CShader*		m_pShaderCom = nullptr;
 
-
-
+	//Engine::CVMR9Graph*		m_pVmr = nullptr;
+	//_float					m_fVideoTime;
 	_float					m_fFrameCnt = 0;
 	_float					m_fFrameMax = 37.f;
 	

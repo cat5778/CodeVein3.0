@@ -192,6 +192,7 @@ Engine::CResources* Engine::CStaticMesh::Clone(void)
 
 void Engine::CStaticMesh::Free(void)
 {
+	_bool bis = m_bClone;
 	CMesh::Free();
 
 	for (_ulong i = 0; i < m_dwSubsetCnt; ++i)
@@ -210,5 +211,6 @@ void Engine::CStaticMesh::Free(void)
 	Safe_Release(m_pSubsetBuffer);
 	Safe_Release(m_pMesh);
 	Safe_Release(m_pOriMesh);
+
 }
 

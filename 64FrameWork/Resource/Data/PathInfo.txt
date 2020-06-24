@@ -1,6 +1,24 @@
 
 
 DynamicMesh
+CocoonDevil.X
+CocoonDevil
+..\..\Resource\Mesh\DynamicMesh\CocoonDevil\
+
+
+DynamicMesh
+Davis.X
+Davis
+..\..\Resource\Mesh\DynamicMesh\Davis\
+
+
+OldPlayer2
+Player2.X
+Player2
+..\..\Resource\Mesh\DynamicMesh\OldPlayer2\Player2\
+
+
+DynamicMesh
 Player.X
 Player
 ..\..\Resource\Mesh\DynamicMesh\Player\
@@ -16,6 +34,12 @@ DynamicMesh
 PlayerXfile.X
 PlayerXfile
 ..\..\Resource\Mesh\DynamicMesh\PlayerXfile\
+
+
+DynamicMesh
+RedDevil.X
+RedDevil
+..\..\Resource\Mesh\DynamicMesh\RedDevil\
 
 
 DynamicMesh
@@ -430,18 +454,18 @@ StaticMesh
 RussianHatShield.X
 RussianHatShield
 ..\..\Resource\Mesh\StaticMesh\Public\Weapon\RussianHatShield\
+Weapon
+Public
+StaticMesh
+SK_NormalHalberdB.X
+SK_NormalHalberdB
+..\..\Resource\Mesh\StaticMesh\Public\Weapon\SK_NormalHalberdB\
 Terrain
 Shop
 StaticMesh
 SM_LawnL2.X
 SM_LawnL2
 ..\..\Resource\Mesh\StaticMesh\Shop\Terrain\SM_LawnL2\
-Map
-Snow
-StaticMesh
-Map.X
-Map
-..\..\Resource\Mesh\StaticMesh\Snow\Map\Map\
 Map3
 Snow
 StaticMesh

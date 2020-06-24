@@ -7,7 +7,7 @@
 #include "FrameMgr.h"
 #include "FontMgr.h"
 #include "InputDev.h"
-
+#include "VMR9Graph.h"
 BEGIN(Engine)
 
 // GraphicDev

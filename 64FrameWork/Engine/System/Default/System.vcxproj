@@ -198,6 +198,7 @@ call CopySystem.bat</Command>
     <ClCompile Include="..\Code\InputDev.cpp" />
     <ClCompile Include="..\Code\Timer.cpp" />
     <ClCompile Include="..\Code\TimerMgr.cpp" />
+    <ClCompile Include="..\Code\VMR9Graph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_System.h" />
@@ -209,6 +210,7 @@ call CopySystem.bat</Command>
     <ClInclude Include="..\Code\InputDev.h" />
     <ClInclude Include="..\Code\Timer.h" />
     <ClInclude Include="..\Code\TimerMgr.h" />
+    <ClInclude Include="..\Code\VMR9Graph.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Header\Export_System.inl" />

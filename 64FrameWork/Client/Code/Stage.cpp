@@ -6,6 +6,8 @@
 #include "RussianHat.h"
 #include "Shield.h"
 #include "Field.h"
+#include "RedDevil.h"
+#include "Halberd.h"
 //#include "SoundMgr.h"
 CStage::CStage(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -127,14 +129,40 @@ HRESULT CStage::Ready_GameLogic_Layer(const _tchar* pLayerTag)
 
 	if (LOAD_MODE == 5)
 	{
-		pGameObject = CRussianHat::Create(m_pGraphicDev,L"RussianHat",0);
+
+
+		//pGameObject = CRussianHat::Create(m_pGraphicDev,L"RussianHat",0);
+		//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		//FAILED_CHECK_RETURN(pLayer->Add_GameObject(pGameObject->Get_InstName().c_str(), pGameObject), E_FAIL);
+
+		//////Shield 
+		//pGameObject = CShield::Create(m_pGraphicDev, 0);
+		//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		//FAILED_CHECK_RETURN(pLayer->Add_GameObject(L"Shield", pGameObject), E_FAIL);
+
+
+		pGameObject = CRedDevil::Create(m_pGraphicDev, L"RedDevil", 0);
 		NULL_CHECK_RETURN(pGameObject, E_FAIL);
 		FAILED_CHECK_RETURN(pLayer->Add_GameObject(pGameObject->Get_InstName().c_str(), pGameObject), E_FAIL);
 
-		////Shield 
-		pGameObject = CShield::Create(m_pGraphicDev, 0);
+
+		pGameObject = CHalberd::Create(m_pGraphicDev, 0);
 		NULL_CHECK_RETURN(pGameObject, E_FAIL);
-		FAILED_CHECK_RETURN(pLayer->Add_GameObject(L"Shield", pGameObject), E_FAIL);
+		FAILED_CHECK_RETURN(pLayer->Add_GameObject(pGameObject->Get_InstName().c_str(), pGameObject), E_FAIL);
+
+
+		//pGameObject = CRedDevil::Create(m_pGraphicDev, L"RedDevil", 1);
+		//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		//FAILED_CHECK_RETURN(pLayer->Add_GameObject(pGameObject->Get_InstName().c_str(), pGameObject), E_FAIL);
+
+
+		//pGameObject = CHalberd::Create(m_pGraphicDev, 1);
+		//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		//FAILED_CHECK_RETURN(pLayer->Add_GameObject(pGameObject->Get_InstName().c_str(), pGameObject), E_FAIL);
+
+
+
+		int a = 3;
 
 	}
 

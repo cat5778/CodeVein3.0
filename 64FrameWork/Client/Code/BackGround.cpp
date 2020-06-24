@@ -16,6 +16,19 @@ CBackGround::~CBackGround(void)
 
 HRESULT CBackGround::Ready_GameObject(void)
 {
+	//m_pVmr = new Engine::CVMR9Graph;
+	//m_pVmr->SetMediaWindow(g_hWnd);
+	//HRESULT hr=	m_pVmr->Ready_Video(g_hWnd,"../Title.avi");
+	//
+	//LONGLONG llPlayTime = 0;
+	//m_pVmr->PlayGraph();
+	//m_pVmr->Resize();
+	//m_pVmr->GetPtrMediaSeeking()->GetStopPosition(&llPlayTime);
+	//m_fVideoTime = llPlayTime / 100000.f;
+	
+	//m_pVmr->SetLayerZOrder(0, 0);
+
+
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	//m_pTransformCom->m_vScale.x = 2.f;
@@ -23,13 +36,15 @@ HRESULT CBackGround::Ready_GameObject(void)
 
 	m_pTransformCom->m_vScale.x = (_float) m_pTextureCom->Get_ImageInfo().Width;
 	m_pTransformCom->m_vScale.y = (_float)m_pTextureCom->Get_ImageInfo().Height;
-
-
+	//	
 	return S_OK;
 }
 
 _int CBackGround::Update_GameObject(const _float& fTimeDelta)
 {
+	//m_fVideoTime += fTimeDelta;
+
+
 	m_fFrameCnt += m_fFrameMax * fTimeDelta * 0.5f;
 
 	if (m_fFrameCnt >= m_fFrameMax)

@@ -200,10 +200,6 @@ HRESULT CStaticObject::Add_Component(void)
 	m_pComponentMap[Engine::ID_STATIC].emplace(L"Com_StaticMesh", pComponent);// º¯°æ
 
 	pComponent = m_pTransformCom = Engine::CTransform::Create();
-	if (pComponent == nullptr)
-	{
-		int a = 3;
-	}
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_pComponentMap[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 

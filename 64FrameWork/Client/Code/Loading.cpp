@@ -59,17 +59,7 @@ _uint CLoading::Thread_Dynamic(void * pArg)
 	CLoading*		pLoading = (CLoading*)pArg;
 	_uint iFlag = 1;
 
-
-	switch (pLoading->Get_LoadingID())
-	{
-	case LOADING_STAGE:
-		iFlag = pLoading->Loading_Dynamic();
-		break;
-
-	case LOADING_BOSS:
-		break;
-	}
-
+	iFlag = pLoading->Loading_Dynamic();
 
 	return iFlag;
 }
@@ -79,15 +69,7 @@ _uint CLoading::Thread_Basic(void * pArg)
 	CLoading*		pLoading = (CLoading*)pArg;
 	_uint iFlag = 2;
 	
-	switch (pLoading->Get_LoadingID())
-	{
-	case LOADING_STAGE:
-		iFlag = pLoading->Loading_Basic();
-		break;
-
-	case LOADING_BOSS:
-		break;
-	}
+	iFlag = pLoading->Loading_Basic();
 
 	_endthreadex(2);
 
@@ -99,16 +81,7 @@ _uint CLoading::Thread_Collider(void * pArg)
 	CLoading*		pLoading = (CLoading*)pArg;
 	_uint iFlag = 3;
 
-	switch (pLoading->Get_LoadingID())
-	{
-	case LOADING_STAGE:
-		iFlag = pLoading->Loading_Collider();
-		break;
-
-	case LOADING_BOSS:
-		break;
-	}
-
+	iFlag = pLoading->Loading_Collider();
 
 	return iFlag;
 }
@@ -144,7 +117,6 @@ _uint CLoading::Loading_ForStage(void)
 													NULL,
 													NULL),
 													E_FAIL);
-
 	
 	lstrcpy(m_szLoading[STATIC], L"Mesh Loading.............................");
 
@@ -221,13 +193,6 @@ _uint CLoading::Loading_ForStage(void)
 			L"SM_NormalGreatSwordA_ba01.X"),
 			E_FAIL);
 
-		//FAILED_CHECK_RETURN(Engine::Ready_Meshes(m_pGraphicDev,
-		//	RESOURCE_STAGE,
-		//	L"RussianHat",
-		//	Engine::TYPE_DYNAMIC,
-		//	L"../../Resource/Mesh/DynamicMesh/RussianHat/",
-		//	L"RussianHat.X"),
-		//	E_FAIL);
 		FAILED_CHECK_RETURN(Engine::Ready_Meshes(m_pGraphicDev,
 			RESOURCE_STAGE,
 			L"RussianHatShield",
@@ -236,6 +201,13 @@ _uint CLoading::Loading_ForStage(void)
 			L"RussianHatShield.X"),
 			E_FAIL);
 
+		FAILED_CHECK_RETURN(Engine::Ready_Meshes(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"Halberd",
+			Engine::TYPE_STATIC,
+			L"../../Resource/Mesh/StaticMesh/Public/Weapon/SK_NormalHalberdB/",
+			L"SK_NormalHalberdB.X"),
+			E_FAIL);
 
 	}
 		break;
@@ -306,6 +278,15 @@ _bool CLoading::Loading_Dynamic()
 		L"../../Resource/Mesh/DynamicMesh/RussianHat/",
 		L"RussianHat.X"),
 		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Meshes(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"RedDevil",
+		Engine::TYPE_DYNAMIC,
+		L"../../Resource/Mesh/DynamicMesh/RedDevil/",
+		L"RedDevil.X"),
+		E_FAIL);
+
 	lstrcpy(m_szLoading[DYNAMIC], L"Character Loading Complete > ,< ");
 	m_uiLoadingCheck[DYNAMIC] = 1;
 
@@ -477,7 +458,7 @@ _bool CLoading::Loading_Collider()
 {
 	lstrcpy(m_szLoading[COLLIDER], L"Collider Loading.............................");
 
-	TCHAR szFileName[MAX_STR] = L"../../Resource/Data/Collider/Test.txt";
+	TCHAR szFileName[MAX_STR] = L"../../Resource/Data/Collider/Test2.txt";
 
 	ifstream fin;
 

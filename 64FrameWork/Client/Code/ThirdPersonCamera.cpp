@@ -49,7 +49,6 @@ _int CThirdPersonCamera::Update_GameObject(const _float& fTimeDelta)
 	Key_Input(fTimeDelta);
 	_int iExit = Engine::CCamera::Update_GameObject(fTimeDelta);
 
-
 	return iExit;
 }
 
@@ -117,8 +116,6 @@ void CThirdPersonCamera::Target_Renewal(const _float& fTimeDelta)
 		_vec3	vLook = *m_pTransformCom->Get_Info(Engine::INFO_LOOK);
 		D3DXVec3Normalize(&vLook, &vLook);
 		//m_pTransformCom->Rotation(Engine::ROT_Y, D3DXToRadian());
-
-
 
 		m_pMonTransform = dynamic_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"RussianHat_0", L"Com_Transform", Engine::ID_DYNAMIC));
 		m_vAt = *m_pMonTransform->Get_Info(Engine::INFO_POS);   // TargetPos 

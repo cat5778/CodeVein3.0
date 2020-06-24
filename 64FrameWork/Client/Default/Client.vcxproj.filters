@@ -79,9 +79,6 @@
     <Filter Include="02. GameObejct\01. Stage\06. Shield">
       <UniqueIdentifier>{79a75905-f53d-4da7-97b8-630c16a01d2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObejct\01. Stage\07. Effect">
-      <UniqueIdentifier>{ab92ecc8-6f4f-4843-bb0e-b0412f6e6f0b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\00. MainApp">
       <UniqueIdentifier>{f9d345e0-8d22-4f7d-9d05-d2309dc3c7ef}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,15 @@
     </Filter>
     <Filter Include="10.Manager\03. SoundMgr">
       <UniqueIdentifier>{29ba2134-4c09-436e-8297-f84f25b8afc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObejct\01. Stage\10. Monster\RedDevil">
+      <UniqueIdentifier>{4ceddb11-d554-4570-ba56-03819651c0ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObejct\01. Stage\09. Effect">
+      <UniqueIdentifier>{ab92ecc8-6f4f-4843-bb0e-b0412f6e6f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObejct\01. Stage\07 .Halberd">
+      <UniqueIdentifier>{5cced16a-d385-455b-9703-74f07014465a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +184,7 @@
       <Filter>02. GameObejct\02. Public\02 StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Effect.h">
-      <Filter>02. GameObejct\01. Stage\07. Effect</Filter>
+      <Filter>02. GameObejct\01. Stage\09. Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\ThirdPersonCamera.h">
       <Filter>02. GameObejct\02. Public\03.ThirdPersonCamera</Filter>
@@ -206,6 +212,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\SoundMgr.h">
       <Filter>10.Manager\03. SoundMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RedDevil.h">
+      <Filter>02. GameObejct\01. Stage\10. Monster\RedDevil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Halberd.h">
+      <Filter>02. GameObejct\01. Stage\07 .Halberd</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,7 +276,7 @@
       <Filter>02. GameObejct\02. Public\02 StaticObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Effect.cpp">
-      <Filter>02. GameObejct\01. Stage\07. Effect</Filter>
+      <Filter>02. GameObejct\01. Stage\09. Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ThirdPersonCamera.cpp">
       <Filter>02. GameObejct\02. Public\03.ThirdPersonCamera</Filter>
@@ -292,6 +304,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\SoundMgr.cpp">
       <Filter>10.Manager\03. SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RedDevil.cpp">
+      <Filter>02. GameObejct\01. Stage\10. Monster\RedDevil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Halberd.cpp">
+      <Filter>02. GameObejct\01. Stage\07 .Halberd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

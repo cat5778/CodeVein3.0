@@ -45,26 +45,26 @@ namespace Engine
 //	{ MessageBoxW(NULL, _message, L"System Message",MB_OK); /*__ASM { int 3 };*/return _return;}
 
 	#define NULL_CHECK_RETURN( _ptr, _return)	\
-	{if( _ptr == 0){/*__ASM { int 3 };*/assert(_ptr == 0);  return S_OK;}}
+	{if( _ptr == 0){__debugbreak();/*__/*__ASM { int 3 };*/assert(_ptr == 0);  return S_OK;}}
 
 	#define NULL_CHECK_MSG( _ptr, _message )		\
-	{if( _ptr == 0){MessageBox(NULL, _message, L"System Message",MB_OK);/*__ASM { int 3 };*/}}
+	{if( _ptr == 0){MessageBox(NULL, _message, L"System Message",MB_OK);__debugbreak();/*__ASM { int 3 };*/}}
 
 	#define NULL_CHECK_RETURN_MSG( _ptr, _return, _message )	\
-	{if( _ptr == 0){MessageBox(NULL, _message, L"System Message",MB_OK);assert(_ptr == 0);/*__ASM { int 3 };*/return S_OK;}}
+	{if( _ptr == 0){MessageBox(NULL, _message, L"System Message",MB_OK);assert(_ptr == 0);__debugbreak();/*__ASM { int 3 };*/return S_OK;}}
 
 
 	#define FAILED_CHECK(_hr)	if( ((HRESULT)(_hr)) < 0 )	\
-	{ MessageBoxW(NULL, L"Failed", L"System Error",MB_OK); /*__ASM { int 3 };*/ return E_FAIL;}
+	{ MessageBoxW(NULL, L"Failed", L"System Error",MB_OK);__debugbreak(); /*__ASM { int 3 };*/ return E_FAIL;}
 
 	#define FAILED_CHECK_RETURN(_hr, _return)	if( ((HRESULT)(_hr)) < 0 )		\
-	{ MessageBoxW(NULL, L"Failed", L"System Error",MB_OK); /*__/*__ASM { int 3 };*/ return S_OK;}
+	{ MessageBoxW(NULL, L"Failed", L"System Error",MB_OK); __debugbreak();/*__/*__ASM { int 3 };*/ return S_OK;}
 
 	#define FAILED_CHECK_MSG( _hr, _message)	if( ((HRESULT)(_hr)) < 0 )	\
-	{ MessageBoxW(NULL, _message, L"System Message",MB_OK); /*__ASM { int 3 };*/return E_FAIL;}
+	{ MessageBoxW(NULL, _message, L"System Message",MB_OK); __debugbreak();/*__ASM { int 3 };*/return E_FAIL;}
 
 	#define FAILED_CHECK_RETURN_MSG( _hr, _return, _message)	if( ((HRESULT)(_hr)) < 0 )	\
-	{ MessageBoxW(NULL, _message, L"System Message",MB_OK); /*__ASM { int 3 };*/return S_OK;}
+	{ MessageBoxW(NULL, _message, L"System Message",MB_OK);__debugbreak(); /*__ASM { int 3 };*/return S_OK;}
 
 
 

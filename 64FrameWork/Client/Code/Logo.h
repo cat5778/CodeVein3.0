@@ -10,6 +10,10 @@
 
 #include "Loading.h"
 class CMainApp;
+BEGIN(Engine)
+class CVMR9Graph;
+
+END
 class CLogo : public Engine::CScene
 {
 private:
@@ -33,6 +37,7 @@ private:
 	_matrix						m_matView, m_matProj;
 	CLoading*					m_pLoading;
 	list<MESH_PATH*>*			m_ppPathlist = nullptr;
+	Engine::CVMR9Graph*		m_pVmr = nullptr;
 
 public:
 	static CLogo*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

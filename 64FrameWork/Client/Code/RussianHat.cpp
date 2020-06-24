@@ -25,15 +25,16 @@ CRussianHat::~CRussianHat()
 HRESULT CRussianHat::Ready_GameObject()
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-	m_uiAni = 39;
 
 	m_fCurHp = m_fMaxHp = 200.f;
-	m_fAttackRange = 10.f;
+	m_fAttackRange = 4.f;
 	Set_TransformData();
+
+	m_eCurState = RUSSIAN_START_IDLE;
+	m_ePreState = RUSSIAN_APPERANCE_N;
 
 	if (LOAD_MODE != 0)
 		m_uiStageIdx = LOAD_MODE;
-
 	switch ((LOADMODE)m_uiStageIdx)
 	{
 	case LOAD_NOMAL:
@@ -57,7 +58,9 @@ HRESULT CRussianHat::Ready_GameObject()
 		m_pTransformCom->Set_Pos(-12.32f, 2.73f, -25.3241f);
 		m_pNaviCom->Set_Index(76);// Base Init Idx 38 
 		Load_Text(L"../../Resource/Data/NavMash/Temp5.txt");
+	
 
+		break;
 
 		//보스 정위치
 		//m_pTransformCom->Set_Pos(-20.2f, 1.9f, -49.f);
@@ -70,13 +73,13 @@ HRESULT CRussianHat::Ready_GameObject()
 		//m_pTransformCom->Set_Pos(5.3f, 0.19f, -0.95f);
 		//m_pNaviCom->Set_Index(38);// Snow Init Idx 38  //43 Idle
 		//Load_Text(L"../../Resource/Data/NavMash/BaseCompleteNav.txt");
-		break;
+
 	case LOAD_END:
 		break;
 	default:
 		break;
 	}
-	m_eCurState = RUSSIAN_START_IDLE;
+
 
 
 //Test	
@@ -107,8 +110,8 @@ _int CRussianHat::Update_GameObject(const _float & fTimeDelta)
 		//StateMachine();
 		//Pattern(fTimeDelta);
 	//m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, true);
-	cout << "보스 체력= " << m_fCurHp << endl;
-	cout << m_eCurState << endl;
+	//cout << "보스 체력= " << m_fCurHp << endl;
+	//cout << m_eCurState << endl;
 	srand((unsigned int)time(NULL));
 	
 	if (!m_bIsStart)
@@ -240,8 +243,9 @@ void CRussianHat::StateMachine()
 			m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
 
 			m_pMeshCom->Set_AnimationSet(42);
-			break;
 		}
+		break;
+
 		case RUSSIAN_BATTLE_START:
 		{
 			m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
@@ -261,7 +265,7 @@ void CRussianHat::StateMachine()
 			//m_pMeshCom->Set_AnimationSet(38);
 			m_pMeshCom->Set_AnimationSet(41);
 		}
-			break;
+		break;
 		case RUSSIAN_WALK://29~32
 		{
 			m_pColliderGroupCom->Set_ColliderEnable(Engine::COLOPT_ATTACK, false);
@@ -364,9 +368,11 @@ void CRussianHat::StateMachine()
 		}
 			break;
 		case RUSSIAN_ATTACK_HORN2:
+		{
 			//m_pMeshCom->Set_AnimationSet(15);
 			m_pMeshCom->Set_AnimationSet(18);
-			break;
+		}
+		break;
 		case RUSSIAN_ATTACK_JUMP:
 		{
 			m_fRotSpeed = 17.0f;
@@ -388,21 +394,28 @@ void CRussianHat::StateMachine()
 		}
 			break;
 		case RUSSIAN_KETSUGI_AIMSHOOT:
+		{
 			//m_pMeshCom->Set_AnimationSet(17);
 			m_pMeshCom->Set_AnimationSet(20);
-			break;
+		}
+		break;
+		
 		case RUSSIAN_FIST_ATTACKBOOST1_S:
+		{	
 			m_fAnimSpeed = 2.0f;
 			m_fRotSpeed = 7.0f;
 			m_fAttackRange = 30.f;
 			//m_pMeshCom->Set_AnimationSet(12);
 			m_pMeshCom->Set_AnimationSet(15);
-			break;
+		}
+		break;
 		case RUSSIAN_FIST_ATTACKBOOST1_L:
+		{	
 			m_fAnimSpeed = 1.5f;
 			//m_pMeshCom->Set_AnimationSet(11);
 			m_pMeshCom->Set_AnimationSet(14);
-			break;
+		}
+		break;
 		case RUSSIAN_FIST_ATTACKBOOST1_A_E:
 			m_fAnimSpeed = 2.0f;
 			//m_pMeshCom->Set_AnimationSet(10);
@@ -437,21 +450,28 @@ void CRussianHat::StateMachine()
 			m_pMeshCom->Set_AnimationSet(7);
 			break;
 		case RUSSIAN_FIST_BOOSTUP_S:
+		{
 			//m_pMeshCom->Set_AnimationSet(3);
 			m_pMeshCom->Set_AnimationSet(6);
-			break;
+		}	break;
 		case RUSSIAN_FIST_KEYSUGI_ALLRANGE_S:
+		{	
 			//m_pMeshCom->Set_AnimationSet(2);
 			m_pMeshCom->Set_AnimationSet(5);
-			break;
+		}
+		break;
 		case RUSSIAN_FIST_KEYSUGI_ALLRANGE_L:
+		{	
 			//m_pMeshCom->Set_AnimationSet(1);
 			m_pMeshCom->Set_AnimationSet(4);
-			break;
+		}
+		break;
 		case RUSSIAN_FIST_KEYSUGI_ALLRANGE_E:
+		{	
 			//m_pMeshCom->Set_AnimationSet(0);
 			m_pMeshCom->Set_AnimationSet(3);
-			break;
+		}
+		break;
 		case RUSSIAN_END:
 			break;
 		default:

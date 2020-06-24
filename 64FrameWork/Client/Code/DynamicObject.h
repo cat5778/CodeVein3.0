@@ -44,12 +44,12 @@ public:
 	_float					Get_AngleOnTheTarget();
 	_float					Get_TargetDist();
 
-	void					HurtMon(_float fDamage);
+	void					HurtMon(_float fDamage,_bool bIsStrongAtk);
 	
 
 	void					MoveAni(_float fTimeDelta, _float fMinRatio, _float fMaxRatio, _float fSpeed, _vec3 vDir, _bool bIsJump=false);
 	void					RotateAni(_float fTimeDelta, _float fMinRatio, _float fMaxRatio, _float fRotSpeed);
-	void					RotateToTarget(_float fTimeDelta, _float fMinRatio, _float fMaxRatio=1.f);
+	void					RotateToTarget(_float fTimeDelta, _float fMinRatio, _float fMaxRatio=0.f);
 	void					SetColliderEnable(_float fMin, _float fMax);
 
 
@@ -76,6 +76,10 @@ protected:
 	TRANSFORM_INFO			m_tTransformInfo;
 	_bool					m_bIsRespawn = false;
 	_uint					m_uiAni = 0;
+	_bool					m_bIsHurt = false;
+	_bool					m_bisStrongHurt = false;
+	_vec3					m_vHurtPos = { INIT_VEC3 };
+	_bool					m_bIsMonDead = false;
 
 protected:
 	_uint					m_uiPattern = 0;

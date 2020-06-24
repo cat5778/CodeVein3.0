@@ -275,25 +275,25 @@ HRESULT CField::Load_Text(const _tchar * pFilePath)
 		//wstrTemp = wstrConvert;
 
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vScale.x = atof(cTemp);
+		tInfo.vScale.x = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vScale.y = atof(cTemp);
+		tInfo.vScale.y = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR);
-		tInfo.vScale.z = atof(cTemp);
+		tInfo.vScale.z = (_float)atof(cTemp);
 
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vRotation.x = atof(cTemp);
+		tInfo.vRotation.x = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vRotation.y = atof(cTemp);
+		tInfo.vRotation.y = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR);
-		tInfo.vRotation.z = atof(cTemp);
+		tInfo.vRotation.z = (_float)atof(cTemp);
 
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vPosition.x = atof(cTemp);
+		tInfo.vPosition.x = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR); // 공백을 포함한 문장 단위(개행 단위)로 읽어오기.
-		tInfo.vPosition.y = atof(cTemp);
+		tInfo.vPosition.y = (_float)atof(cTemp);
 		fin.getline(cTemp, MIN_STR);
-		tInfo.vPosition.z = atof(cTemp);
+		tInfo.vPosition.z = (_float)atof(cTemp);
 
 		_uint uiNameCnt = wstrTemp.find_last_of(L'_');
 		wstring wstrObjectName = wstrTemp.substr(0, uiNameCnt);

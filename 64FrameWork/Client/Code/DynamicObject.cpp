@@ -42,6 +42,7 @@ HRESULT CDynamicObject::Ready_GameObject()
 
 _int CDynamicObject::Update_GameObject(const _float & fTimeDelta)
 {
+
 	m_pMeshCom->Set_AnimationSet(m_uiAni);
 	Engine::CGameObject::Update_GameObject(fTimeDelta);
 	m_pMeshCom->Play_Animation(fTimeDelta);
@@ -317,9 +318,15 @@ _float CDynamicObject::Get_TargetDist()
 	return D3DXVec3Length(&(Get_TargetPos() - Get_Pos()));
 }
 
-void CDynamicObject::HurtMon(_float fDamage)
+
+void CDynamicObject::HurtMon(_float fDamage, _bool bIsStrongAtk)
 {
 	m_fCurHp -= fDamage;
+	if (!m_bIsHurt)
+	{
+		m_bIsHurt = true;
+	}
+	m_bisStrongHurt = bIsStrongAtk;
 }
 
 HRESULT CDynamicObject::Load_Text(const TCHAR * pFilePath)

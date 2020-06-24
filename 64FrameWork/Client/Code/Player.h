@@ -49,6 +49,7 @@ private:
 	void		AttackMoveSet(_float fTimeDelta);
 	void		StorngAttackMoveSet(_float fTimeDelta);
 	void		ChargeAttackMoveSet(_float fTimeDelta);
+	void		DodgeAttackMoveSet(_float fTimeDelta);
 	void		Guard(_float fTimeDelta);
 	void		Guard_H(_float fTimeDelta);
 
@@ -60,7 +61,8 @@ private:
 
 	void		Hurt(_float fTimeDelta, _vec3 vPos , _vec3 vTargetPos,_float fDamage);
 	void		KnockBack(_float fTimeDelta);
-	
+	void		SetColliderEnable(_float fMin, _float fMax);
+
 
 
 private:

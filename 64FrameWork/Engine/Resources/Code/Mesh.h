@@ -12,8 +12,8 @@ protected:
 	explicit CMesh(const CMesh& rhs);
 	virtual ~CMesh(void);
 
-protected:
-	_bool				m_bClone;
+//protected:
+//	_bool				m_bClone;
 
 public:
 	virtual CResources*		Clone(void)PURE;

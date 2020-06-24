@@ -479,15 +479,21 @@ BOOL CObjectTool::OnInitDialog()
 				m_hFloor = m_StaticTree.InsertItem(pPathInfo->wstrObjectType.c_str(), 0, 0, m_hGroup, TVI_SORT);
 			}
 
-			Ready_Mesh(pPathInfo);//½ºÅÂÆ½¸Å½¬ 
+			//Ready_Mesh(pPathInfo);//½ºÅÂÆ½¸Å½¬ 
+			if (Engine::Ready_Meshes(m_pDevice, RESOURCE_STAGE, pPathInfo->wstrObjectType.c_str(), Engine::TYPE_STATIC, pPathInfo->wstrRelative.c_str(), pPathInfo->wstrName.c_str()) < 0)
+				continue;
+
+		
 		}
 		else if (pPathInfo->wstrMeshType.compare(L"DynamicMesh") == 0)
 		{
 			if (pPathInfo->wstrObjectType.compare(L"PlayerXfile") == 0)
-				continue;;
+				continue;
 			m_hEtc = m_StaticTree.InsertItem(pPathInfo->wstrObjectType.c_str(), 0, 0, m_hDynamicMesh, TVI_SORT);
+			
+			//Engine::Ready_Meshes(m_pDevice, RESOURCE_STAGE, pPathInfo->wstrObjectType.c_str(), Engine::TYPE_DYNAMIC, pPathInfo->wstrRelative.c_str(), pPathInfo->wstrName.c_str())
 			if (Engine::Ready_Meshes(m_pDevice, RESOURCE_STAGE, pPathInfo->wstrObjectType.c_str(), Engine::TYPE_DYNAMIC, pPathInfo->wstrRelative.c_str(), pPathInfo->wstrName.c_str()) < 0)
-				return false;
+				continue;
 
 		}
 		else

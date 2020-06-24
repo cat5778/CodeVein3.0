@@ -43,6 +43,7 @@ enum OBJECTSTATE {
 	OBJ_FALL,
 	OBJ_ATTACK,
 	OBJ_STRONG_ATTACK,
+	OBJ_DODGE_ATTACK,
 	OBJ_CHARGE_ATTACK,
 	OBJ_GUARD,
 	OBJ_GUARD_H,
@@ -118,7 +119,29 @@ enum RUSSIANTSTATE {
 	RUSSIAN_FIST_KEYSUGI_ALLRANGE_E,
 	RUSSIAN_END
 };
-
+enum REDDEVILSTATE
+{
+	RED_Death_F,
+	RED_Death_B,
+	RED_DownEnd_S,
+	RED_DownEnd_P,
+	RED_Down_S,
+	RED_Down_P,
+	RED_Damage_FR,
+	RED_Damage_FL,
+	RED_Damage_BR,
+	RED_Damage_BL,
+	RED_Run_F,
+	RED_DashAttack_E,
+	RED_DashAttack_L,
+	RED_DashAttack_S,
+	RED_Attack3,
+	RED_Attack2,
+	RED_Attack1,
+	RED_Fight_Idle,
+	RED_NoneFight_Idle,
+	RED_RedDevil_End
+};
 enum COLLIDEROPTION{
 					COLL_OPT_OBJECT,
 					COLL_OPT_ATTACK,
